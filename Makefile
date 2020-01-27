@@ -6,9 +6,11 @@ OBJ_DIR := obj
 SRC := $(wildcard $(SRC_DIR)/*.c)
 OBJ := $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-CFLAGS	 := -Wall -Iinclude $(shell pkg-config --cflags dbus-1 glib-2.0 dbus-glib-1)  
+C_LIBS   := dbus-1 glib-2.0 dbus-glib-1 libconfig
+
+CFLAGS	 := -Wall -Iinclude $(shell pkg-config --cflags $(C_LIBS))  
 LDFLAGS  := -Llib 
-LDLIBS   := -lm $(shell pkg-config --libs dbus-1 glib-2.0 dbus-glib-1)  
+LDLIBS   := -lm $(shell pkg-config --libs $(C_LIBS))  
 
 
 .PHONY: all clean

@@ -2,6 +2,7 @@
 #include <dbus/dbus.h>
 #include <dbus/dbus-glib.h>
 #include <glib.h>
+#include <libconfig.h>
 
 #define DBUS_CHANNEL "org.conteplator.walle"
 
