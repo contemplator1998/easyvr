@@ -1,8 +1,8 @@
-EXE := easyvr
-
 SRC_DIR := src
 OBJ_DIR := obj
+BIN_DIR := bin
 
+EXE := $(BIN_DIR)/easyvr
 SRC := $(wildcard $(SRC_DIR)/*.c)
 OBJ := $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
@@ -17,13 +17,16 @@ LDLIBS   := -lm $(shell pkg-config --libs $(C_LIBS))
 
 all: $(EXE)
 
-$(EXE): $(OBJ)
+$(EXE): $(OBJ) | $(BIN_DIR)
 	$(CC) $(LDFLAGS) $^ $(LDLIBS) -o $@
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_DIR):
+	mkdir $@
+
+$(BIN_DIR):
 	mkdir $@
 
 clean:
